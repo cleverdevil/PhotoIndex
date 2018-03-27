@@ -42,18 +42,28 @@
     <div class="photos-container col-md-20 col-md-offset-0">
     <h1>Recent Photos</h1>
 <?php
-    foreach ($items as $photo) {
-        if ($photo['thumbnail_large'] == null) {
-            continue;
-        }
+        foreach ($items as $photo) {
+            $thumbs = [];
+            if ($photo['thumbnail_large'] != null) {
+                array_push($thumbs, $photo['thumbnail_large']);
+            } else if ($photo['thumbs_large'] != null) {
+                foreach ($photo['thumbs_large'] as $thumb) {
+                    array_push($thumbs, $thumb['url']);
+                }
+            } else {
+                continue;
+            }
+
+            foreach ($thumbs as $thumb) {
 ?>
-    <!-- photo -->
-    <a href="<?= $photo->getURL() ?>">
-    <div class="photo" style="background-image:url(<?= $photo['thumbnail_large'] ?>); background-size: cover; background-position: 50%">
-    </div>
-    </a>
-    <!-- end photo -->
+                <!-- photo -->
+                <a href="<?= $photo->getURL() ?>">
+                    <div class="photo" style="background-image:url(<?= $thumb ?>); background-size: cover; background-position: 50%">
+                </div>
+                </a>
+                <!-- end photo -->
 <?php
+            }
     }
 ?>
     </div>
