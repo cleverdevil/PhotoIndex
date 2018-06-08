@@ -40,7 +40,7 @@
 
 <div class="photos-overview">
     <div class="photos-container col-md-20 col-md-offset-0">
-    <h1>Recent Photos</h1>
+    <h1><i class="fa fa-camera-retro"></i> Recent Photos</h1>
 <?php
         foreach ($items as $photo) {
             $thumbs = [];
