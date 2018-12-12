@@ -40,8 +40,12 @@
 
 <div class="photos-overview">
     <div class="photos-container col-md-20 col-md-offset-0">
-    <h1><i class="fa fa-camera-retro"></i> Recent Photos</h1>
+    <h1><i class="fa fa-camera-retro"></i> <?php echo \Idno\Core\Idno::site()->language()->_('Recent Photos'); ?></h1>
 <?php
+
+function h($text)  {
+    return htmlentities(strip_tags($text), ENT_QUOTES, 'UTF-8');
+}
         foreach ($items as $photo) {
             $thumbs = [];
             if ($photo['thumbnail_large'] != null) {
@@ -57,9 +61,14 @@
             foreach ($thumbs as $thumb) {
 ?>
                 <!-- photo -->
-                <a href="<?= $photo->getURL() ?>">
+                <a href="<?= $photo->getURL() ?>"
+                    data-toggle="lightbox"
+                    data-remote="<?= $thumb; ?>"
+                    data-title="<?= h($photo['title']); ?>"
+                    data-footer="<?= h($photo['body']); ?>"
+                    data-gallery="photoindex">
                     <div class="photo" style="background-image:url(<?= $thumb ?>); background-size: cover; background-position: 50%">
-                </div>
+                    </div>
                 </a>
                 <!-- end photo -->
 <?php
