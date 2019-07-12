@@ -6,7 +6,7 @@
 
             function registerPages() {
                 // register photo index page 
-                \Idno\Core\site()->addPageHandler('/photos', '\IdnoPlugins\PhotoIndex\Pages\PhotoIndex');
+                \Idno\Core\site()->routes()->addRoute('/photos', '\IdnoPlugins\PhotoIndex\Pages\PhotoIndex');
             }
             
         }
